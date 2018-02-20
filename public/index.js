@@ -5,7 +5,8 @@ var HomePage = {
   data: function() {
     return {
       people: [],
-      newPerson: {name: "", bio: ""}
+      newPerson: {name: "", bio: ""},
+      errors: []
     };
   },
   created: function() {
@@ -20,6 +21,10 @@ var HomePage = {
         .then(function(response) {
           this.people.push(response.data);
           this.newPerson = {name: "", bio: ""};
+          this.errors = [];
+        }.bind(this))
+        .catch(function(error) { 
+          this.errors = error.response.data.errors; 
         }.bind(this));
     },
     deletePerson: function(inputPerson) {
