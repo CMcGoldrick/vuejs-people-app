@@ -32,8 +32,14 @@
 
         Search by Bio: <input v-model="bioFilter">
       </div>
-      <transition-group name="zoomLeft">
-        <div v-for="person in people" v-if="isValidPerson(person)" v-bind:key="person.id">
+
+      <div>
+        <button v-on:click="setSortAttribute('name')">Sort by Name</button>
+        <button v-on:click="setSortAttribute('bio')">Sort by Bio</button>
+      </div>
+
+      <transition-group name="bounceUp">
+        <div v-for="person in sortedPeople" v-if="isValidPerson(person)" v-bind:key="person.id">
           <h2 v-on:click="toggleBioVisible(person)">{{ person.name }}</h2>
           <div v-if="person.bioVisible">
             <h4>{{ person.bio }}</h4>
