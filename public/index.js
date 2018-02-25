@@ -6,7 +6,9 @@ var HomePage = {
     return {
       people: [],
       newPerson: {name: "", bio: ""},
-      errors: []
+      errors: [],
+      nameFilter: "",
+      bioFilter: ""
     };
   },
   created: function() {
@@ -33,6 +35,11 @@ var HomePage = {
     },
     toggleBioVisible: function(inputPerson) {
       inputPerson.bioVisible = !inputPerson.bioVisible;
+    },
+    isValidPerson: function(inputPerson) {
+      var validName = inputPerson.name.toLowerCase().includes(this.nameFilter.toLowerCase());
+      var validBio = inputPerson.bio.toLowerCase().includes(this.bioFilter.toLowerCase());
+      return validName && validBio;
     }
   },
   computed: {}
